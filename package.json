@@ -11,8 +11,19 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": ["cli.js", "ui.js"],
-  "author": "Manuel Romero (mrm8488@gmail.com)",
+  "keywords": [
+    "cli-app",
+    "cli",
+    "search",
+    "find",
+    "matching",
+    "programming",
+    "stackoverflow",
+    "so",
+    "relevant"
+  ],
 
+  "author": "Manuel Romero (mrm8488@gmail.com)",
   "license": "MIT",
   "dependencies": {
     "auto-bind": "^1.2.0",
