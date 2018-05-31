@@ -7,6 +7,7 @@ const autoBind = require("auto-bind");
 const dns = require("dns");
 const axios = require("axios");
 
+const urlBase = `https://api.stackexchange.com/2.2/search?order=desc&sort=votes&site=stackoverflow&intitle=`;
 const open = url => opn(url, { wait: false });
 
 const handleSelect = item => {
@@ -65,8 +66,8 @@ const Search = ({ query, results, onChangeQuery }) => {
       <Text bold>
         <Text green> Welcome to StackOverflow CLI tool!</Text>
       </Text>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <QueryInput
         query={query}
         placeholder="Type your question here!"
@@ -149,7 +150,6 @@ class StackOverflow extends Component {
   }
 
   async fetchResults(query) {
-    const urlBase = `https://api.stackexchange.com/2.2/search?order=desc&sort=votes&site=stackoverflow&intitle=`;
     const url = `${urlBase}"${query}"`;
     const response = await axios.get(url);
     const results = response.data.items;
