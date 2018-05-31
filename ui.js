@@ -52,8 +52,6 @@ const QueryInput = ({ query, placeholder, onChange }) => (
   </div>
 );
 
-const Result = ({ result }) => <Text green>{`${result.title}`}</Text>;
-
 const Search = ({ query, results, onChangeQuery }) => {
   const items = results.length
     ? results.map(result => ({
@@ -64,9 +62,14 @@ const Search = ({ query, results, onChangeQuery }) => {
 
   return (
     <span>
+      <Text bold>
+        <Text green> Welcome to StackOverflow CLI tool!</Text>
+      </Text>
+      <br/>
+      <br/>
       <QueryInput
         query={query}
-        placeholder="Results will appear here!"
+        placeholder="Type your question here!"
         onChange={onChangeQuery}
       />
 
