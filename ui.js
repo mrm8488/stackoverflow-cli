@@ -53,13 +53,20 @@ const QueryInput = ({ query, placeholder, onChange }) => (
   </div>
 );
 
-const Search = ({ query, results, onChangeQuery }) => {
+const Search = ({ query, results, onChangeQuery, searchDone }) => {
   const items = results.length
     ? results.map(result => ({
         label: `${result.title} (${result.answer_count} answer/s)`,
         url: result.link
       }))
     : [];
+
+  const renderResults =
+    searchDone && !items.length
+      ? false
+      : searchDone && items.length
+        ? true
+        : false;
 
   return (
     <span>
@@ -75,7 +82,11 @@ const Search = ({ query, results, onChangeQuery }) => {
       />
 
       <br />
-      <SelectInput items={items} onSelect={handleSelect} />
+      
+      {searchDone && !items.length && <NoResultsMessage />}
+
+      {searchDone &&
+        items.length && <SelectInput items={items} onSelect={handleSelect} />}
       <br />
     </span>
   );
@@ -89,12 +100,13 @@ class StackOverflow extends Component {
     this.state = {
       stage: STAGE_CHECKING,
       query: "",
-      results: []
+      results: [],
+      searchDone: false
     };
   }
 
   render() {
-    const { stage, query, results } = this.state;
+    const { stage, query, results, searchDone } = this.state;
 
     return (
       <span>
@@ -106,6 +118,7 @@ class StackOverflow extends Component {
             query={query}
             results={results}
             onChangeQuery={this.handleChangeQuery}
+            searchDone={searchDone}
           />
         )}
       </span>
@@ -131,7 +144,8 @@ class StackOverflow extends Component {
   handleChangeQuery(query) {
     this.setState({
       query,
-      results: []
+      results: [],
+      searchDone: false
     });
   }
 
@@ -155,7 +169,7 @@ class StackOverflow extends Component {
     const results = response.data.items;
 
     if (this.state.query.length > 1) {
-      this.setState({ results });
+      this.setState({ results, searchDone: true });
     }
   }
 }
