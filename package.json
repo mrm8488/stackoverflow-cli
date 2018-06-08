@@ -1,8 +1,7 @@
 {
   "name": "stackoverflow-cli",
   "version": "1.0.0",
-  "description":
-    "A CLI tool to search in StackOverflow usign react in the terminal (ink)",
+  "description": "A CLI tool to search in StackOverflow usign react in the terminal (ink)",
   "bin": "cli.js",
   "engines": {
     "node": ">=8"
@@ -10,7 +9,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "files": ["cli.js", "ui.js"],
+  "files": [
+    "cli.js",
+    "ui.js"
+  ],
   "keywords": [
     "cli-app",
     "cli",
@@ -22,7 +24,6 @@
     "so",
     "relevant"
   ],
-
   "author": "Manuel Romero (mrm8488@gmail.com)",
   "license": "MIT",
   "dependencies": {
@@ -33,7 +34,6 @@
     "ink": "^0.3.1",
     "ink-select-input": "^1.0.0",
     "ink-text-input": "^1.0.0",
-    "meow": "^5.0.0",
     "opn": "^5.3.0"
   }
 }

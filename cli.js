@@ -1,5 +1,4 @@
 "use strict";
-const meow = require("meow");
 const importJsx = require("import-jsx");
 const { h, render } = require("ink");
 
@@ -15,7 +14,7 @@ const main = () => {
 
   const onExit = () => {
     unmount();
-    process.exit();
+    process.exit(0);
   };
 
   unmount = render(h(ui, { onError, onExit }));
