@@ -7,7 +7,8 @@ const autoBind = require("auto-bind");
 const dns = require("dns");
 const axios = require("axios");
 
-const urlBase = `https://api.stackexchange.com/2.2/search?order=desc&sort=votes&site=stackoverflow&intitle=`;
+const urlBase = `https://api.stackexchange.com/2.2/search/advanced?order=desc&sort=relevance&site=stackoverflow&q=`;
+const itemsPerPage = 10;
 const open = url => opn(url, { wait: false });
 
 const handleSelect = item => {
@@ -61,12 +62,7 @@ const Search = ({ query, results, onChangeQuery, searchDone }) => {
       }))
     : [];
 
-  const renderResults =
-    searchDone && !items.length
-      ? false
-      : searchDone && items.length
-        ? true
-        : false;
+  const renderResults = searchDone && items.length;
 
   return (
     <span>
@@ -82,11 +78,13 @@ const Search = ({ query, results, onChangeQuery, searchDone }) => {
       />
 
       <br />
-      
+
       {searchDone && !items.length && <NoResultsMessage />}
 
       {searchDone &&
-        items.length && <SelectInput items={items} onSelect={handleSelect} />}
+        items.length > 0 && (
+          <SelectInput items={items} onSelect={handleSelect} />
+        )}
       <br />
     </span>
   );
@@ -164,7 +162,7 @@ class StackOverflow extends Component {
   }
 
   async fetchResults(query) {
-    const url = `${urlBase}"${query}"`;
+    const url = `${urlBase}${query}&page=1&pagesize=${itemsPerPage}`;
     const response = await axios.get(url);
     const results = response.data.items;
 
