@@ -1,5 +1,5 @@
 "use strict";
-const { Component, Text } = require("ink");
+const { h, Component, Indent, Text } = require("ink");
 const TextInput = require("ink-text-input");
 const SelectInput = require("ink-select-input");
 const opn = require("opn");
